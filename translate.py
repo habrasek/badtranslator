@@ -64,7 +64,7 @@ for x in characters:
     url = f'https://translate.google.com/?sl=zh-CN&tl=en&text={x}&op=translate'
     browser.visit(url)
     
-    countdown(3)
+    countdown(2)
     
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
@@ -77,3 +77,11 @@ for x in characters:
     
     sentence.append(characters)
     
+final = ''
+
+for word in sentence:
+    final  += f' {word}'
+    
+print(final)
+
+browser.quit()
