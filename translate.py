@@ -35,9 +35,15 @@ def countdown(s):
 
 enter = input('Type in a word or sentence: ')
 
-url_input = enter.replace(' ', '%20')
+if ' ' in enter:
+    enter = enter.replace(' ', '%20')
 
-url =  f'https://translate.yandex.com/?lang=en-zh&text={url_input}'
+
+# url =  f'https://translate.yandex.com/?lang=en-zh&text={url_input}'
+
+url = f'https://translate.google.com/?sl=en&tl=zh-TW&text={enter}&op=translate'
+
+print(url)
 
 from splinter import Browser
 from bs4 import BeautifulSoup
@@ -48,12 +54,14 @@ browser = Browser('chrome', **executable_path, headless=False)
 
 browser.visit(url)
 
-countdown(20)
+countdown(5)
 
 html = browser.html
 soup = BeautifulSoup(html, 'html.parser')
 
-quotes = soup.find_all('span', class_='translation-word translation-chunk')
+# quotes = soup.find_all('span', class_='translation-word translation-chunk')
+
+quotes = soup.find_all('span', class_='Q4iAWc')
 
 characters = str(quotes[0].text)
 
